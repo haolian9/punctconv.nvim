@@ -1,6 +1,4 @@
 -- see: https://zh.wikipedia.org/wiki/%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7
---
--- todo: trim surrounded spaces
 
 local utf8 = require("infra.utf8")
 
@@ -140,7 +138,5 @@ end
 
 return function()
   local state = make_state()
-  return function(original)
-    return convert(original, state)
-  end
+  return function(original) return convert(original, state) end
 end

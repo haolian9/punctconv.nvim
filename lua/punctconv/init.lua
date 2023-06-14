@@ -9,8 +9,8 @@ local api = vim.api
 
 M.multiline_vsel = function()
   local bufnr = api.nvim_get_current_buf()
-  local start_row, start_col, stop_row, stop_col = vsel.range(bufnr)
-  if start_row == 0 and start_col == 0 and stop_row == 0 and stop_col == 0 then return end
+  local range = vsel.range(bufnr)
+  if range == nil then return end
   local lines = vsel.multiline_text(bufnr)
   if lines == nil then return end
 
@@ -20,7 +20,7 @@ M.multiline_vsel = function()
     table.insert(result, table.concat(conv(line), ""))
   end
 
-  api.nvim_buf_set_lines(bufnr, start_row - 1, stop_row, true, result)
+  api.nvim_buf_set_lines(bufnr, range.start_line, range.stop_line, true, result)
 end
 
 return M
