@@ -3,6 +3,7 @@
 local M = {}
 
 local vsel = require("infra.vsel")
+
 local converter = require("punctconv.converter")
 
 local api = vim.api
