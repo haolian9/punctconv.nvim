@@ -8,7 +8,7 @@ local converter = require("punctconv.converter")
 
 local api = vim.api
 
-M.multiline_vsel = function()
+function M.multiline_vsel()
   local bufnr = api.nvim_get_current_buf()
   local range = vsel.range(bufnr)
   if range == nil then return end
