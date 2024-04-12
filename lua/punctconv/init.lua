@@ -2,6 +2,7 @@
 
 local M = {}
 
+local buflines = require("infra.buflines")
 local vsel = require("infra.vsel")
 
 local converter = require("punctconv.converter")
@@ -21,7 +22,7 @@ function M.multiline_vsel()
     table.insert(result, table.concat(conv(line), ""))
   end
 
-  api.nvim_buf_set_lines(bufnr, range.start_line, range.stop_line, true, result)
+  buflines.replaces(bufnr, range.start_line, range.stop_line, result)
 end
 
 return M
