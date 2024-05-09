@@ -42,13 +42,13 @@ local conv3 = {
 local conv3_max = 3
 
 local function conv3_concat(list, first_n)
-  if first_n == conv3_max then return table.concat(list, "") end
+  if first_n == conv3_max then return table.concat(list) end
 
   local sub = {}
   for i = 1, first_n do
     table.insert(sub, list[i])
   end
-  return table.concat(sub, "")
+  return table.concat(sub)
 end
 
 ---@param original string @utf8 string
