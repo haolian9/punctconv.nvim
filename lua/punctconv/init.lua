@@ -3,14 +3,13 @@
 local M = {}
 
 local buflines = require("infra.buflines")
+local ni = require("infra.ni")
 local vsel = require("infra.vsel")
 
 local converter = require("punctconv.converter")
 
-local api = vim.api
-
 function M.multiline_vsel()
-  local bufnr = api.nvim_get_current_buf()
+  local bufnr = ni.get_current_buf()
   local range = vsel.range(bufnr)
   if range == nil then return end
   local lines = vsel.multiline_text(bufnr)
