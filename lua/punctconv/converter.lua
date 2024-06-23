@@ -46,7 +46,7 @@ local function conv3_concat(list, first_n)
 
   local sub = {}
   for i = 1, first_n do
-    table.insert(sub, list[i])
+    sub[i] = list[i]
   end
   return table.concat(sub)
 end

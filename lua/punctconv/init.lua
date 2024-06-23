@@ -17,8 +17,8 @@ function M.multiline_vsel()
 
   local result = {}
   local conv = converter()
-  for _, line in ipairs(lines) do
-    table.insert(result, table.concat(conv(line)))
+  for i, line in ipairs(lines) do
+    result[i] = table.concat(conv(line))
   end
 
   buflines.replaces(bufnr, range.start_line, range.stop_line, result)
