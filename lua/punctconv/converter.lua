@@ -61,21 +61,17 @@ local function convert(original, state)
 
   local buf = { iter() }
   while #buf > 0 do
-    local next_loop = false
-
-    -- conv1
-    if not next_loop then
+    do -- conv1
       local rune = buf[1]
       local to = conv1[rune]
       if to ~= nil then
         table.insert(result, to)
         table.remove(buf, 1)
-        next_loop = true
+        goto continue
       end
     end
 
-    -- conv2
-    if not next_loop then
+    do -- conv2
       local rune = buf[1]
       local too = conv2[rune]
       if too ~= nil then
@@ -85,12 +81,11 @@ local function convert(original, state)
         local to = too[(count % 2) + 1]
         table.insert(result, to)
         table.remove(buf, 1)
-        next_loop = true
+        goto continue
       end
     end
 
-    -- conv3
-    if not next_loop then
+    do -- conv3
       for _ = 1, conv3_max - #buf do
         local next_rune = iter()
         if next_rune == nil then break end
@@ -103,8 +98,7 @@ local function convert(original, state)
         if to ~= nil then
           table.insert(result, to)
           ate = i
-          next_loop = true
-          break
+          goto continue
         end
       end
       for _ = 1, ate do
@@ -112,16 +106,18 @@ local function convert(original, state)
       end
     end
 
-    if not next_loop then
+    do
       table.insert(result, buf[1])
       table.remove(buf, 1)
-      next_loop = true
+      goto continue
     end
 
     do
       local rune = iter()
       if rune ~= nil then table.insert(buf, rune) end
     end
+
+    ::continue::
   end
 
   return result
